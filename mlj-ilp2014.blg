@@ -1,0 +1,79 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: mlj-ilp2014.aux
+The style file: spmpsci.bst
+Database file #1: fs.bib
+A bad cross reference---entry "JoshiRS08"
+refers to entry "DBLP:conf/ilp/2008", which doesn't exist
+A bad cross reference---entry "RamakrishnanJBS07"
+refers to entry "DBLP:conf/ilp/2007", which doesn't exist
+A bad cross reference---entry "SpeciaSRN06"
+refers to entry "DBLP:conf/ilp/2006", which doesn't exist
+A bad cross reference---entry "NageshRCKDB12"
+refers to entry "DBLP:conf/emnlp/2012", which doesn't exist
+A bad cross reference---entry "ChalamallaNSR08"
+refers to entry "DBLP:conf/cikm/2008", which doesn't exist
+A bad cross reference---entry "JawanpuriaNR11"
+refers to entry "DBLP:conf/icml/2011", which doesn't exist
+A bad cross reference---entry "NairSRK12"
+refers to entry "DBLP:conf/aaai/2012", which doesn't exist
+Warning--I didn't find a database entry for "something"
+Warning--I didn't find a database entry for "DBLP:conf/icml/2011"
+Warning--I didn't find a database entry for "DBLP:conf/aaai/2012"
+Warning--I didn't find a database entry for "DBLP:conf/emnlp/2012"
+Warning--I didn't find a database entry for "DBLP:conf/cikm/2008"
+Warning--I didn't find a database entry for "DBLP:conf/ilp/2008"
+Warning--I didn't find a database entry for "DBLP:conf/ilp/2007"
+Warning--I didn't find a database entry for "DBLP:conf/ilp/2006"
+Warning--missing publisher in Jelasity_04
+Warning--missing publisher in Langford_09a
+Warning--there's a number but no volume in Larson_77
+Warning--empty booktitle in Srinivasan_99a
+Warning--missing publisher in Srinivasan_99a
+Warning--missing publisher in Sun_14
+Warning--empty year in Sutton_92
+Warning--empty publisher in Tao_11
+Warning--can't use both volume and number fields in Tsitsiklis_86
+Warning--can't use both volume and number fields in zinkevich_10
+You've used 70 entries,
+            2946 wiz_defined-function locations,
+            1061 strings with 17308 characters,
+and the built_in function-call counts, 56059 in all, are:
+= -- 6539
+> -- 1157
+< -- 34
++ -- 757
+- -- 406
+* -- 2433
+:= -- 5413
+add.period$ -- 83
+call.type$ -- 70
+change.case$ -- 482
+chr.to.int$ -- 0
+cite$ -- 80
+duplicate$ -- 6276
+empty$ -- 3661
+format.name$ -- 463
+if$ -- 11823
+int.to.chr$ -- 0
+int.to.str$ -- 70
+missing$ -- 714
+newline$ -- 293
+num.names$ -- 142
+pop$ -- 2429
+preamble$ -- 1
+purify$ -- 342
+quote$ -- 0
+skip$ -- 3337
+stack$ -- 0
+substring$ -- 2577
+swap$ -- 5111
+text.length$ -- 34
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 272
+warning$ -- 10
+while$ -- 270
+width$ -- 72
+write$ -- 708
+(There were 7 error messages)
