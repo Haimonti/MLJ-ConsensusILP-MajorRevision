@@ -89,10 +89,10 @@ grestore
 %
 \begin{document}
 
-\title{Consensus-Based Modelling using Distributed Feature Construction\thanks{A short 6-page version of this paper was presented at the 24th International Conference on Inductive Logic Programming, held in conjunction with ECML PKDD, France. Furthermore, a significant part of the work in this paper was done when the first author was an Associate Research Scientist at the Center for Computational Learning Systems (CCLS), Columbia University, NY.}}
+\title{Consensus-Based Modeling using Distributed Feature Construction\thanks{A short 6-page version of this paper was presented at the 24th International Conference on Inductive Logic Programming, held in conjunction with ECML PKDD, France. Furthermore, a significant part of the work in this paper was done when the first author was an Associate Research Scientist at the Center for Computational Learning Systems (CCLS), Columbia University, NY.}}
  \subtitle{}
 
-\titlerunning{Consensus-Based Modelling} 
+\titlerunning{Consensus-Based Modeling} 
 
 \author{Haimonti Dutta \and Ashwin Srinivasan}
 
@@ -126,22 +126,22 @@ predictive model. Conceptually, the case for using ILP to construct relational
 features rests on treating these features as functions, the automated discovery of which
 necessarily requires some form of first-order learning. Practically,
 there are now several reports in the literature that suggest that
-augmenting any existing features with ILP-discovered relational features can
+augmenting any existing feature with ILP-discovered relational features can
 substantially improve the predictive power of a model.
 While the approach is straightforward enough,
 much still needs to be done to scale it up to explore more fully the space
 of possible features that can be constructed by an ILP system. This
 is in principle, infinite and in practice, extremely large. Applications have been
 confined to heuristic or random selections from this space. In this paper,
-we address this computational difficulty by allowing features to
+we address this computational difficulty by allowing features and models to
 be constructed in a distributed manner. That is, there is a network of
 computational units, each of which employs an ILP engine to construct
 some small number of features and then builds a (local) model. We then employ a consensus-based algorithm, in which
-neighbouring nodes share information to update local models. For a category of models
+neighboring nodes share information to update local models. For a category of models
 (those with convex loss functions), it can be shown that the algorithm will result in all nodes
 converging to a consensus model. In practice, it may be slow to achieve this convergence.
 Nevertheless, our results on synthetic and real
-datasets that suggest that in relatively short time
+datasets suggest that in relatively short time
 the ``best'' node in the network
 reaches a model whose predictive accuracy is comparable to
 that obtained using more computational effort in a non-distributed setting
@@ -167,7 +167,7 @@ enable the automatic construction of descriptions that use relations
 (used here in the formal sense of a truth value assignment to $n$-tuples).
 
 There is at least one kind of                                          
-tasks where some form of relational learning would appear to be necessary.
+task where some form of relational learning would appear to be necessary.
 This is to do with the identification of functions
 (again used formally, in the sense of being a uniquely
 defined relation) whose domain is the set of instances in the data.
@@ -228,10 +228,10 @@ these features.
 %
 
 The approach usually, but not always, separates relational learning
-(to discover features) and modelling
+(to discover features) and modeling
 (to build models using these features). There will of course
 be problems that require the joint identification of relational
- with features and models---the emerging area of statistical relational
+features and models---the emerging area of statistical relational
 learning (SRL), for example, deals with the conceptual and implementation issues
 that arise in the joint estimation of statistical parameters and relational
 models. It would appear that separate construction of features
@@ -272,11 +272,11 @@ engine, and constructs a local linear model.
 Using a simple consensus-based algorithm, all nodes in the network converge on
 the optimal weights for all the features. The setting is naturally amenable to
 distributed learning, providing us with a mechanism of scaling-up the construction
-of models using ILP-based feature discovery. Our approach does not result an optimal answer
+of models using ILP-based feature discovery. Our approach does not result in an optimal solution
 to the feature-selection problem. However it does have some positive aspects: it provides one
 way of distributing the computational task of feature-construction; and given multiple, possibly overlapping sets of
 relational features, it provides one way of identifying the best model (for a specific category of models).
-Figure~\ref{illEx} illustrates this. The algorithm for distributed feature estimation, described in
+Figure~\ref{illEx} illustrates this. The algorithm for Distributed Feature Estimation(DFE), described in
 Section~\ref{sec:probdesc} is an implementation of such an approach.
 %For a specific category of models, this
 %algorithm can be used to construct optimal (or near-optimal) models for discrimination.
@@ -296,10 +296,10 @@ Section~\ref{sec:probdesc} is an implementation of such an approach.
 %\end{enumerate}
 
 \begin{figure}[htb]
-\centerline{\includegraphics[height=0.30\textheight]{ilp_dfe.jpg}}
+\centerline{\includegraphics[height=0.50\textheight]{ilp_dfe.jpg}}
 \caption{An illustrative example of the consensus-based approach using Michalski's ``Trains" problem \protect{\cite{Larson_77}}.
 Each node has local features generated from an ILP engine, builds local models, estimates loss and shares
-information with its neighbours. Eventually we would like all nodes converge to the same model.}
+information with its neighbors. Eventually we would like all nodes to converge to the same model.}
 \label{illEx}
 \end{figure}
 
@@ -315,7 +315,7 @@ information with its neighbours. Eventually we would like all nodes converge to 
 Section \ref{conModel} formulates the problem as one of consensus-based model construction. Section \ref{sec:alg}
 presents an iterative procedure for constructing models in a network of nodes capable
 of exchanging information about their local models. Experimental
-results are in Section \ref{sec:expt}. Section \ref{sec:related} presents related work; section \ref{sec:concl} discusses open
+results are in Section \ref{sec:expt}. Section \ref{sec:related} presents related work; Section \ref{sec:concl} discusses open
 issues and concludes the paper.
 
 %\section{Distributed Feature Construction with ILP}
@@ -451,7 +451,7 @@ termination of the algorithm will be used for ranking the features.
   (e) If there is no significant change in the local weight vectors of one of the sites then stop
  }
  
-\caption{Consensus-Based Modelling}
+\caption{Distributed Feature Estimation (DFE) by Consensus-Based Modeling}
 \label{alg:fs}
 }
 \end{algorithm}
@@ -490,7 +490,7 @@ consensus-based protocol. There are two main sub-parts of the algorithm:
 \noindent \textbf{Exchange of Local Function Estimate:}  Each site locally computes the loss based on its attributes and then gossips with the neighbors to get information on other attributes.
 On receiving an update from a neighbor, the site re-evaluates $J_i$ by forming a component-wise convex combination of its old vector and the values in the messages received from neighbors i.e.   
  $J_i^{t+1}=\alpha_{ii}(X_i W_i^T) + \alpha_{ji} (X_j W_j^T)$. 
-It is interesting to note that $\alpha_{il}, 0 \le \alpha_{il} \le 1$, is a non-negative weight that captures the fraction of information site $i$ is willing to share with site $l$. The choice of $\alpha_{il}$ may be deterministic or randomized and may or may not depend on the time $t$ \cite{Kempe_03}. The $k\times k$ matrix $A$ comprising of $\alpha_{il}, 1 \le i \le k, 1 \le l \le k$ is a ``stochastic" matrix such that it has non-negative entries and each row sums to one. More generally, this reflects the state transition probabilities between sites. Figure~\ref{stateTrans} illustrates the state transition between two sites $S_i$ and $S_j$. 
+It is interesting to note that $\alpha_{ij}, 0 \le \alpha_{ij} \le 1$, is a non-negative weight that captures the fraction of information site $i$ is willing to share with site $j$. The choice of $\alpha_{ij}$ may be deterministic or randomized and may or may not depend on the time $t$ \cite{Kempe_03}. The $k\times k$ matrix $A$ comprising of $\alpha_{ij}, 1 \le i \le k, 1 \le j \le k$ is a ``stochastic" matrix such that it has non-negative entries and each row sums to one. More generally, this reflects the state transition probabilities between sites. Figure~\ref{stateTrans} illustrates the state transition between two sites $S_i$ and $S_j$. 
 
 Another interpretation of the diffusion of $J_i$ amongst the neighbors of $i$ involves drawing analogies from Markov chains -- the diffusion is mathematically identical to the evolution of state occupation probabilities. Furthermore, a simple vector equation can be written for updating $J_i^t$ to $J_i^{t+1}$ i.e. $J_i^{t+1} = A(i) (J_i^t)_{N_i}$ where $A(i)$ corresponds to the row $i$ of the matrix $A$ and $(J_i^t)_{N_i}$ is a matrix that has $|N_i|$ rows (each row corresponding to a neighbor of Site $S_i$) and $n$ columns (each column corresponding to all the instances). More generally, $\mathcal{J}^{t+1} = A \mathcal{J}^{t}$ where $\mathcal{J}^{t+1}$ is a $k \times n$ matrix storing the local function estimates of each of the $n$ instances at site $k$ and $A$ is the $k \times k$ transition probability matrix corresponding to all the sites. It follows that $lim_{t \rightarrow \infty} A^t$ exists and this controls the rate of convergence of the algorithm. 
 
@@ -662,7 +662,7 @@ There exists a positive integer $B$ such that: \\
 %J(W_i^t + W_j^t) \le J(W_i^t) + \frac{\partial J_j^{t}}{\partial W_j^{t}}\nabla J(W_i^t) + \frac{K}{2}||W_j^t||_2^2, \text{ for all } W_i^t, W_j^t \in R^m
 %\end{equation}
 \end{asm}
-\noindent Finally, for completion we introduce the notions of \emph{martingales} and the martingale convergence theorem(s) which are required for the proofs in this appendix. 
+\noindent Finally, for completion we introduce the notions of \emph{martingales} and the martingale convergence theorem(s) which are required for the proofs in the appendix. 
 
 A martingale is a model of a fair game where knowledge of past events never helps predict the mean of the future winnings. In general, a martingale is a stochastic process for which, at a particular time in the realized sequence, the expectation of the next value in the sequence is equal to the present observed value even given knowledge of all prior observed values at a current time\footnote{http://en.wikipedia.org/wiki/Martingale$\_$(probability$\_$theory)}. A formal definition (using measure theory \cite{Tao_11}) is given below:
 
@@ -701,7 +701,7 @@ Then there exists a nonnegative random variable $Y$ such that the sequence $\{Y_
 
 
 
-\noindent \textbf{Proposition 1.0. Convergence of the DFE Algorithm } Under the Assumptions 1.0-3.0, there exists some $\eta^0 > 0$, such that if $0 < \eta_i^t < \eta^0$, then:
+\noindent \textbf{Proposition 1.0. Convergence of the Distributed Feature Estimation (DFE) Algorithm } Under the Assumptions 1.0-3.0, there exists some $\eta^0 > 0$, such that if $0 < \eta_i^t < \eta^0$, then:
 \begin{enumerate}
 \item $\lim_{t \to \infty} J(W_i^t)$ exists and is the same for all $i$ with probability 1.
 \item $\lim_{t \to \infty} (W_i^t - W_j^t)=0$ with probability 1 and in the mean square sense.
@@ -719,7 +719,7 @@ Then there exists a nonnegative random variable $Y$ such that the sequence $\{Y_
 \label{sec:exptaims}
 Our objective is to investigate empirically the utility of the consensus-based
 algorithm we have described. 
-We use $Model(k,f)$ to denote the model returned the consensus-based
+We use $Model(k,f)$ to denote the model returned by the consensus-based
 algorithm in Section \ref{sec:alg}
 using $k$ nodes in a network, each of which can call on an ILP engine to
 construct at most $f$ features. In this section, we compare the
@@ -760,14 +760,14 @@ Data for experiments are in two categories:
     For this we use S.H. Muggleton's random train
     generator\footnote{{\tt http://www.doc.ic.ac.uk/$\mbox{}^\sim$shm/Software/GenerateTrains/}}                                                                                                                                             
     that defines a random process for generating examples. We will use this
-    data for controlled experiments to test principal conjecture
+    data for controlled experiments to test the principal conjecture
     about the comparative performances of $Distributed$ and $Centralised$ models.
 
 \item \textbf{Real. } We report results from experiments conducted using $7$
     well-studied real world problems from the ILP literature. These are:
-    Mutagenesis \cite{King_96}; Carcinogenesis \cite{King_96a}; DssTox \cite{something};
+    Mutagenesis \cite{King_96}; Carcinogenesis \cite{King_96a}; DssTox \cite{Muggleton_08a};
     and 4 datasets arising from the comparison of Alzheimer's drugs
-    denoted here as $Amine$, $Choline$, $Scop$ and $Toxic$ \cite{something}.
+    denoted here as $Amine$, $Choline$, $Scop$ and $Toxic$ \cite{Srinivasan_1996y}.
     Our purpose in examining performance
     on the real-data is twofold. First, we intend to see if the use of
     linear models is too restrictive for real problems. Second, we would like to see
@@ -793,7 +793,7 @@ very close to a random graph (\cite{Jelasity_04},\cite{Jelasity_05}). %Two diffe
 
 The ILP system used in all experiments is Aleph \cite{Srinivasan_99a}.
 The latest version of this program (Aleph 6) is available from the second author.
-The Prolog compiler used is Yap (version 6.2.0). The programs are executed on
+The Prolog compiler used is Yap\footnote{\url{http://www.dcc.fc.up.pt/~vsc/Yap/}} (version 6.2.0). The programs are executed on
 a dual Quad-Core AMD Opteron 2384 processors equipped with 2.7 GHz processors, 32 GB RAM,
 and local storage of $4 \times 146$ GB 15K RPM Serial attached SCSI (SAS) hard disks. 
 
@@ -804,7 +804,7 @@ and local storage of $4 \times 146$ GB 15K RPM Serial attached SCSI (SAS) hard d
 For the synthetic data, we distinguish between ``simple'' targets
 (comprising disjuncts of 1-4 features) and ``complex'' targets (comprising disjuncts of 8--12 features).\footnote{This
 distinction between {\em simple\/} and {\em complex\/} is based on results from cognitive psychology which suggest that people find it 
-difficult to remember concepts with larger that 7 disjuncts.}
+difficult to remember concepts with larger than 7 disjuncts.}
 We call this dimension ``Target''. Our method for experiments is straightforward:
 
 \begin{enumerate}
@@ -820,7 +820,7 @@ We call this dimension ``Target''. Our method for experiments is straightforward
                     learning parameter $\eta_i$ for the
                     node. It is assumed that all nodes agree on the initial choice of
                     $T$ and $\eta_i = \eta$. 
-               \item Execute the algorithm described in Section \ref{algo} for $T$ iterations
+               \item Execute the algorithm described in Section \ref{alg:fs} for $T$ iterations
                     and the ILP engine restricted to constructing $F$ features
                \item Record the predictive accuracy $A$ of the (local) model along with
                           the time $T$ taken to construct the model (this includes
@@ -833,7 +833,7 @@ We call this dimension ``Target''. Our method for experiments is straightforward
         \item Using a network with a single node:
             \begin{enumerate}
                 \item Execute the
-                    algorithm described in Section \ref{algo} for $T$ iterations, learning
+                    algorithm described in Section \ref{alg:fs} for $T$ iterations, learning
                     parameter $\eta$, 
                     and the ILP engine restricted to constructing $N \times F$ features
                \item Record the predictive accuracy $A'$ of the mode along with the time
@@ -857,16 +857,16 @@ The following additional details are relevant:
         is specified using a large tabulation of features allowed by the language constraints).
         Although only ``good'' features are retained (see below),
         sampling variations can nevertheless result for both $Distributed$ and $Centralised$ models
-        from step of drawing features. In effect, we are performing a randomised search for
+        from the step of drawing features. In effect, we are performing a randomized search for
         good features within a pre-defined feature space. We report averages for $5$ repetitions
-        of draws for the target, and $5$ repetitions of the randomised search for a given target.
+        of draws for the target, and $5$ repetitions of the randomized search for a given target.
 \item A target is generated as follows. For simple targets, the number of
     features is chosen randomly from the range 1 to 4. For complex concepts,
     the number of features is randomly chosen from the range 8 to 12. Features are
     then randomly constructed using the ILP engine, and their disjunction constitute the
     target concept.
 \item As noted previously, data instances for controlled experiments are drawn
-    from the ``Trains" problem. The data generator uses S.H. MuggletonÕs random
+    from the ``Trains" problem. The data generator uses S.H. Muggleton's random
     train generator. This implements a random process in which each data instance
     generated contains the complete description of a data object (nominally, a ``train'').
 \item An initial set of parameters needs to be set for the ILP engine to describe ``good''
@@ -1015,8 +1015,8 @@ a centralised approach in which all features are constructed by a single computa
 \begin{tabular}{|c|c|c||c|c|}\hline
 Model & \multicolumn{2}{|c||}{$Simple$} & \multicolumn{2}{|c|}{$Complex$}\\ \hline
          & Acc.(\%)   & Time (s)        & Acc. (\%)  & Time (s) \\ \cline{2-5}
-$Centr.$ & 83.3(14.4) & 451.3(206.0)& 92.0(7.1)  & 222.8(139.6) \\
-$Distr.$ & 93.4(10.5) & 54.4(15.3)  & 98.7(1.2)  & 41.6(13.7)\\ \hline
+$Centr.$ & 83.3(14.4) & 0.12(0.07)& 92.0(7.1)  & 0.18(0.03) \\
+$Distr.$ & 93.4(10.5) & 0.06(0.07)  & 98.7(1.2)  & 0.04(0.03)\\ \hline
 \end{tabular}
 }}
 \end{center}
@@ -1030,8 +1030,8 @@ $Distr.$ & 93.4(10.5) & 54.4(15.3)  & 98.7(1.2)  & 41.6(13.7)\\ \hline
 \begin{tabular}{|c|c|c||c|c|}\hline
 Model & \multicolumn{2}{|c||}{$Simple$} & \multicolumn{2}{|c|}{$Complex$}\\ \hline
          & Acc.(\%)   & Time (s)       & Acc. (\%)  & Time (s) \\ \cline{2-5}
-$Centr.$ & 83.6(20.1) & 107.7(50.2)& 95.3(0.6)  & 410.4(8.8) \\
-$Distr.$ & 79.9(10.4) & 39.6(9.5)  & 96.6(0.6)  & 52.9(2.7)\\ \hline
+$Centr.$ & 83.6(20.1) & 0.14(0.07)& 95.3(0.6)  & 0.21(0.02) \\
+$Distr.$ & 79.9(10.4) & 0.15(0.07)  & 96.6(0.6)  & 0.06(0.02)\\ \hline
 \end{tabular}
 }}
 \end{center}
@@ -1054,11 +1054,11 @@ $Distr.$ & 79.9(10.4) & 39.6(9.5)  & 96.6(0.6)  & 52.9(2.7)\\ \hline
 
 
 
-What can we expect from the consensus-based learner on the real datasets? Results are in Fig.\ref{fig:tab2}),
+What can we expect from the consensus-based learner on the real datasets? (Results are in Fig.\ref{fig:tab2}),
 and we observe the following:
 (1) There is a significant difference in accuracies between the distributed and
     centralised models on two of the datasets ($Canc330$ and $DssTox$). On balance,
-    we cannot conclude from this that there is either one of the models is better;
+    we cannot conclude from this that either one of the models is better;
 (2) As with the synthetic data, the time for the distributed models is substantially lower.
     As before, the time is dominated by the feature-construction effort. For the real data sets,
     it appears that it is substantially easier to get smaller subsets of good features than larger ones
@@ -1082,13 +1082,13 @@ on real data.
 Problem & \multicolumn{3}{|c||}{$Acc$ (\%)} & \multicolumn{3}{|c|}{$Time$ (s)} \\ \hline
          & Centr.   & Distr. & Base. & Centr. & Distr. & Base. \\ \cline{2-7}
          
-$Mut188$ & 84.3(2.6) &  76.8(0.0) & 84.6(2.6) & 141.5(9.1)& 2.1(0.2)    & --  \\
-$Canc330$ & 67.6(0.5)& 56.8(0.5)  & 50.4(2.8) & 553.2(25.1) & 34.0(5.7) & -- \\
-$DssTox$ & 53.8(0.0) &  61.6(1.0) & 64.7(2.0) & 377.9(23.3) & 26.9(1.5) & --\\
-$Amine$  & 75.5(0.4) & 76.6(0.8) &  71.4(1.7)         &225.6(19.8) &109.2(44.4)           & -- \\
-$Choline$& 72.9(1.3)  &71.2(0.7) &           &264.1(11.6)  &72.4(24.6)           & -- \\
-$Scop$   & 67.2(1.5)  & 69.9(0.3) &           &231.5(5.2)&67.7(26.7)           & -- \\
-$Toxic$  &  76.3(1.3) &81.4(0.2) &  79.2(1.4)         &253.4(9.3)&50.4(12.5)           & -- \\ \hline
+$Mut188$ & 84.3(2.6) &  76.8(0.0) & 84.6(2.6) & 1.93(0.53)& 0.42(0.02)    & --  \\
+$Canc330$ & 67.6(0.5)& 56.8(0.5)  & 50.4(2.8) & 3.56(0.58) & 0.82(0.18) & -- \\
+$DssTox$ & 53.8(0.0) &  61.6(1.0) & 64.7(2.0) & 1.94(0.91) & 0.76(0.48) & --\\
+$Amine$  & 75.5(0.4) & 76.6(0.8) &  71.4(1.7)         &7.02(0.24) &0.87(0.11)           & -- \\
+$Choline$& 72.9(1.3)  &71.2(0.7) &     52.7(1.4)      &13.00(3.06)  &1.64(0.5)           & -- \\
+$Scop$   & 67.2(1.5)  & 69.9(0.3) &   55.1(2.0)        &11.9(0.64)&1.20(0.03)           & -- \\
+$Toxic$  &  76.3(1.3) &81.4(0.2) &  79.2(1.4)         &7.44(3.51)&0.89(0.49)           & -- \\ \hline
 \end{tabular}
 }}
 \end{center}
@@ -1100,11 +1100,79 @@ $Toxic$  &  76.3(1.3) &81.4(0.2) &  79.2(1.4)         &253.4(9.3)&50.4(12.5)    
 \label{fig:tab2}
 \end{figure}
 
-\noindent
-We turn now to some issues that have been brought out by the experiments:
+
+\noindent We turn now to some issues that have been brought out by the experiments:
+
+\begin{figure*}[h]
+\centering
+{
+	\subfigure[Variation in feature and model construction time for five repetitions of the feature-construction process for a randomly drawn simple target. ]
+	{\includegraphics[width=0.85\textwidth, height=0.36\textheight]{simple-RepFeat.jpg}
+	\label{simpleRepFeat}
+	}
+	\subfigure[Variation in feature and model construction time for five repetitions across concepts for simple targets.]
+	{\includegraphics[width=0.85\textwidth,height=0.36\textheight]{simple-RepConcepts.jpg}
+	\label{simpleRepConcepts}
+	}
+}
+\caption{Simple Targets }
+\end{figure*}
+
+\begin{figure*}[h]
+\centering
+{
+	\subfigure[Variation in feature and model construction time for five repetitions of feature-construction process for a randomly drawn complex target. ]
+	{\includegraphics[width=0.8\textwidth, height=0.36\textheight]{complex-RepFeat.jpg}
+	\label{comRepFeat}
+	}
+	\subfigure[Variation in feature and model construction time for five repetitions across concepts for complex targets.]
+	{\includegraphics[width=0.75\textwidth,height=0.36\textheight]{complex-RepConcepts.jpg}
+	\label{comRepConcepts}
+	}
+}
+\caption{Complex Targets }
+\end{figure*}
+
+\begin{figure}[h]
+\begin{minipage}[h]{0.5\textwidth}
+\begin{center}
+{\small{
+\begin{tabular}{|c|c|c|}\hline
+$\lambda$ & $Acc$ (\%) & $Time$ (s) \\ \hline
+
+$0.01$ &92.4 &0.05  \\
+$0.1$ & 92.4& 0.05\\
+$1$ & 93.4& 0.06\\ \hline
+\end{tabular}
+}}
+\end{center}
+\begin{center}
+(a) Simple
+\end{center}
+\end{minipage}
+\begin{minipage}[h]{0.50\textwidth}
+\begin{center}
+{\small{
+\begin{tabular}{|c|c|c|}\hline
+$\lambda$ & $Acc$ (\%) & $Time$ (s) \\ \hline
+
+$0.01$ & 98.7&  0.04\\
+$0.1$ & 95.6& 0.05 \\
+$1$ & 77.8& 0.37\\ \hline
+\end{tabular}
+}}
+\end{center}
+\begin{center}
+(b) Complex
+\end{center}
+\end{minipage}
+
+\caption{Effect of the learning rate $\lambda$.}
+\label{fig:lambda}
+\end{figure}
 
 \begin{description}
-    \item[The learning rate $\lambda$.] As will all methods based on stochastic gradient descent,
+    \item[The learning rate $\lambda$.] As with all methods based on stochastic gradient descent,
             the central parameter remains the learning rate $\lambda$. 
                 Many strategies have been suggested in literature to automatically adjust the
             learning rates.
@@ -1142,7 +1210,9 @@ We turn now to some issues that have been brought out by the experiments:
         model construction is only worthwhile provided communication costs are
         low---there will be real networks (and corresponding simulator settings)
         for which distributed model-construction can be a good or a
-        or a bad approach.
+        bad approach.
+        
+        Figure~\ref{simpleRepFeat} and ~\ref{simpleRepConcepts} depicts the variation in the feature and model construction time for (a) repetitions of feature-construction process for a randomly drawn simple target and (b) repetition across simple concepts. For model construction, the number of iterations $T$ is varied between 1, 5 and 10. In all the cases, a single iteration of the stochastic gradient descent algorithm is good enough to obtain reasonably good accuracy in the distributed settings. Also, for small values of $T$, the feature construction time dominates communication costs. Similar figures for complex targets are presented in Figures~\ref{comRepFeat} and ~\ref{comRepConcepts}. 
         
 %        \begin{figure}[t]
 %	\centerline{\includegraphics[height=0.28\textheight]{stateTrans.jpg}}
@@ -1158,54 +1228,81 @@ We turn now to some issues that have been brought out by the experiments:
 
         
         % (see Fig.~\ref{fig:time}(c)--(d)). 
+ 
+ \begin{figure*}[h]
+\centering
+{
+	\subfigure[ Repetition of the feature-construction process.]
+	{\includegraphics[width=0.85\textwidth, height=0.36\textheight]{simple-RepFeat-FeatMod.jpg}
+	\label{simpleRepFeatMod}
+	}
+	\subfigure[Repetition across concepts.]
+	{\includegraphics[width=0.85\textwidth,height=0.36\textheight]{simple-RepConcepts-FeatMod.jpg}
+	\label{simpleRepConceptsFeatMod}
+	}
+}
+\caption{Variation in feature and model construction time for a randomly drawn simple target. Three different strategies are compared -- Centralized, Distributed and Union.}
+\label{fig:simpleUnion}
+\end{figure*}
+
+ \begin{figure*}[h]
+\centering
+{
+	\subfigure[ Repetition of the feature-construction process.]
+	{\includegraphics[width=0.85\textwidth, height=0.36\textheight]{complex-RepFeat-FeatMod.jpg}
+	\label{complexRepFeatMod}
+	}
+	\subfigure[Repetition across concepts.]
+	{\includegraphics[width=0.85\textwidth,height=0.36\textheight]{complex-RepConcepts-FeatMod.jpg}
+	\label{complexRepConceptsFeatMod}
+	}
+}
+\caption{Variation in feature and model construction time for a randomly drawn complex target. Three different strategies are compared -- Centralized, Distributed and Union.}
+\label{fig:complexUnion}
+\end{figure*}
+
+\begin{figure}[htb]
+% \begin{minipage}[h]{0.3\textwidth}
+\begin{center}
+{\small{
+\begin{tabular}{|c|c|c||c|c|}\hline
+Model & \multicolumn{2}{|c||}{$Simple$} & \multicolumn{2}{|c|}{$Complex$}\\ \hline
+         & Acc.(\%)   & Time (s)        & Acc. (\%)  & Time (s) \\ \cline{2-5}
+$Feat.$ & 98.4(1.74) & 0.31(0.03)& 99.58(0.18)  & 0.39(0.02) \\
+$Con.$ & 93.42(4.71) & 0.21(0.05)  & 95.66 (5.93)  & 0.34(0.04)\\ \hline
+\end{tabular}
+}}
+\end{center}
+\begin{center}
+(a) 
+\end{center}
+% \end{minipage}
+
+\caption{Results on synthetic data for ``Union" of features at a centralized node.
+        The results corresponding to \emph{Feat.} are averages from repetitions of the feature-construction process
+        for a randomly drawn concept while those for \emph{Con.} are averages from repetitions across concepts. In all cases, ``Union" denotes
+        the model obtained by vertically concatenating data from all the nodes in network.}
+\label{fig:tabUnion}
+\end{figure}%
+       
+ \item [Union of Features.] A question that is imperative is, ``How good is the performance of the algorithm, if the centralized approach  were to use the exact union of all the features in the distributed setting?" The results presented in Table~\ref{fig:tabUnion} help answer this question. In general, the model(s) built on the ``Union" of features\footnote{Both the test and train data are concatenated vertically using data from all nodes in the network.} have comparable performance to the distributed algorithm presented here, but this comes at a price in terms of the computational effort required to build the models. Figures~\ref{fig:simpleUnion} and~\ref{fig:complexUnion} further analyze the time by dividing it into feature and model construction time(s). The cost of forming the ``Union" of features is significantly high in most cases compared to the model construction time.
+
     \item[Convergence Accuracy.] In experiments here (both with synthetic and real data), we have observed that
             the predictive accuracy of the model from the distributed setting is comparable to the predictive accuracy from
             the non-distributed setting. Unlike gains in time which can be expected from a distributed setting,
             it is not evident beforehand
             what can be expected on the accuracy front. This is because the models constructed in the two settings sample different
             sets of features. The results here suggest a conjecture that the consensus-based approach will always converge
-            to model that is within some small error bound of the model from a centralised approach with the
+            to model that is within some small error bound of the model from a centralized approach with the
             same number of features. We have some reason to believe that this conjecture may hold
             in some circumstances, based on the use of Sanov's theorem \cite{Sanov_57} and related techniques.
+ \item[Network Topology.] Experiments have been designed to test the effect of the network topology on the convergence rate of the algorithm using synthetic data.  To simulate topologies using the PeerSim simulator, the following method is adapted: A tree is built as nodes arrive uniformly at random in a unit
+square\footnote{The square shape is inconsequential.}, starting at the \emph{root} node denoted by $x_i$. When node $j$ arrives,
+it attaches itself to an already existing node by minimizing the following formula: $W(x_j) + \alpha \text{dist}(x_i, x_j)$, where $\text{dist()}$ is the Euclidean distance and $\alpha$ is a weight parameter. Assuming $K$ to be the number of outgoing edges from a node, three different strategies of node addition are explored: (a) \textbf{Random: } $K$ nodes are added at random. (b)  \textbf{Star: } $K$ nodes are added in a star topology and (c) \textbf{Scale Free Network: } A scale-free network is grown using the Barabasi-Albert (BA) model ensuring that nodes have power law degree distributions. Two values of $K = 2, 8$ were used in empirical analysis. Our results indicate that there were no statistically significant difference in performance for the 10 node network(s) studied in this paper.
+
+
 \end{description}
 
-\begin{figure}[htb]
-\begin{minipage}[h]{0.5\textwidth}
-\begin{center}
-{\small{
-\begin{tabular}{|c|c|c|}\hline
-$\lambda$ & $Acc$ (\%) & $Time$ (s) \\ \hline
-
-$0.01$ &92.4 &40.2  \\
-$0.1$ & 92.4& 37.0\\
-$1$ & 93.4& 54.4\\ \hline
-\end{tabular}
-}}
-\end{center}
-\begin{center}
-(a) Simple
-\end{center}
-\end{minipage}
-\begin{minipage}[h]{0.50\textwidth}
-\begin{center}
-{\small{
-\begin{tabular}{|c|c|c|}\hline
-$\lambda$ & $Acc$ (\%) & $Time$ (s) \\ \hline
-
-$0.01$ & 84.9&  48.0\\
-$0.1$ & 82.5& 39.4 \\
-$1$ & 83.6& 39.6\\ \hline
-\end{tabular}
-}}
-\end{center}
-\begin{center}
-(b) Complex
-\end{center}
-\end{minipage}
-
-\caption{Effect of the learning rate $\lambda$.}
-\label{fig:lambda}
-\end{figure}
 
 %\begin{figure}
 %\begin{minipage}[h]{0.50\textwidth}
@@ -1244,38 +1341,38 @@ $1$ & 83.6& 39.6\\ \hline
 %\end{center}
 %\vspace*{0.2cm}
 %\end{minipage}
-%%\begin{minipage}[h]{0.50\textwidth}
-%%\begin{center}
-%%{\small{
-%%\begin{tabular}{|l|c|c|}\hline
-%%$Time$ & $Simple$  & $Complex$ \\ \hline
-%%Feature Construction & &  \\
-%%Feature Evaluation  & & \\
-%%Model Construction  & & \\
-%%Communication       & & \\ \hline
-%%\end{tabular}
-%%}}
-%%\end{center}
-%%\begin{center}
-%%(c) Centralised
-%%\end{center}
-%%\end{minipage}
-%%\begin{minipage}[h]{0.50\textwidth}
-%%\begin{center}
-%%{\small{
-%%\begin{tabular}{|l|c|c|}\hline
-%%$Time$ & $Simple$  & $Complex$ \\ \hline
-%%Feature Construction & &  \\
-%%Feature Evaluation  & & \\
-%%Model Construction  & & \\
-%%Communication       & &  \\ \hline
-%%\end{tabular}
-%%}}
-%%\end{center}
-%%\begin{center}
-%%(d) Centralised
-%%\end{center}
-%%\end{minipage}
+%\begin{minipage}[h]{0.50\textwidth}
+%\begin{center}
+%{\small{
+%\begin{tabular}{|l|c|c|}\hline
+%$Time$ & $Simple$  & $Complex$ \\ \hline
+%Feature Construction & &  \\
+%Feature Evaluation  & & \\
+%Model Construction  & & \\
+%Communication       & & \\ \hline
+%\end{tabular}
+%}}
+%\end{center}
+%\begin{center}
+%(c) Centralised
+%\end{center}
+%\end{minipage}
+%\begin{minipage}[h]{0.50\textwidth}
+%\begin{center}
+%{\small{
+%\begin{tabular}{|l|c|c|}\hline
+%$Time$ & $Simple$  & $Complex$ \\ \hline
+%Feature Construction & &  \\
+%Feature Evaluation  & & \\
+%Model Construction  & & \\
+%Communication       & &  \\ \hline
+%\end{tabular}
+%}}
+%\end{center}
+%\begin{center}
+%(d) Centralised
+%\end{center}
+%\end{minipage}
 %\caption{Estimates of time spent in feature-engineering, model-construction and communication.
 %(a)--(b) are for the network parameters used in the experiments here. }
 %%(c)--(d)are for networks that have much lower or higher latencies respectively.}
@@ -1347,14 +1444,14 @@ large, complex search spaces such as those by ILP engines
 adapt one of the following strategies:
 \begin{enumerate}
  \item Optimally~\cite{l1Reg,cvpr2007,nips2004} or
-    heuristically~\cite{JoshiRS08,Amrita12,NageshRCKDB12,ChalamallaNSR08,Specia_09,RamakrishnanJBS07,SpeciaSRN06}
+    heuristically~\cite{JoshiRS08,Amrita12,Specia_09,RamakrishnanJBS07,SpeciaSRN06,NageshRCKDB12,ChalamallaNSR08}
     solve a discrete optimization problem.
  %Temporal ordering among features is studied by Nowizin et al.\cite{cvpr2007} while Han et al.\cite{l1Reg} introduce $l_1$ regularization into relational learning for sparse rule combination.
 \item Optimally~\cite{JawanpuriaNR11,NairSRK12} solve a convex
     optimization problem with sparsity inducing regularizers; 
  \item Compute all relational features that satisfy some quality criterion by
     systematically and efficiently exploring a prescribed
-    search space~\cite{pei2004,subseqGap2006,bitSpade,antunes2003,han2005,rakesh1995,han2004,gehrke2002,rastogi1999}.
+    search space~\cite{pei2004,subseqGap2006,bitSpade,antunes2003,han2005,rakesh1995,han2004,gehrke2002,rastogi1999,davis2005integrated,Davis05b,Landwehr:2007,Davis:2007,Dzeroski:1993}.
 \end{enumerate}
 
 \noindent
@@ -1370,12 +1467,12 @@ using the current set of features. Nothing is assumed about the size
 of the feature-space, making it a form of vertical partitioning of the kind
 we are interested in.
 Multiple random searches can clearly be
-conducted in parallel (although this is not done in the paper). As with
-most randomised techniques of this kind, not much can be said about the
+conducted in parallel (although this is not done in the paper)~\cite{Filip_06a,Fonseca:2005}. As with
+most randomized techniques of this kind, not much can be said about the
 final model.
     
 Perhaps of most interest to the work here is the Sparse
-Network Of Winnow (SNoW) classifers described in \cite{Roth_98,CCRR99}.
+Network Of Winnow (SNoW) classifiers described in \cite{Roth_98,CCRR99}.
 As it stands, this horizontally partitions the data into subsets, constructs
 multiple linear models using Winnow's multiplicative update process, and
 finally uses a majority vote to arrive at a consensus classification. This
@@ -1418,22 +1515,20 @@ this would be a first-of-its-kind result for consensus-based methods. In impleme
 terms, we are able to extend the approach we have proposed to other kinds of models
 that use convex loss functions, and to consider a consensus-based version of the
 SNoW architecture. This latter will give us the ability to partition very large datasets,
-and to deal with very large feature-spaces at once. is also not required within the
+and to deal with very large feature-spaces at once. It is also not required within the
 approach that all computational nodes draw from the same feature space (this was a constraint
 imposed here to evaluate the centralised and distributed models in a controlled manner). It may
 be both interesting and desirable for nodes to sample from different feature-spaces, or with
-different support and precision constraints. Finally,
-We need to investigate whether certain kinds of network topologies are better than others (currently,
-we impose no control, and use a randomly generated network).
-Experimentally, we recognise that
+different support and precision constraints. 
+Experimentally, we recognize that
 results on more real-world datasets are always desirable: we hope the results here will
 provide the impetus to explore distributed feature construction by ILP on many more real datasets. 
 
-{\small{
+
 \section*{Acknowledgements}
 
 H.D. is also an adjunct assistant professor at the Department of Computer Science at IIIT, Delhi and an Affiliated Member of the Institute of Data Sciences, Columbia University, NY. A.S. also holds visiting positions at the School of CSE, University of New South Wales, Sydney; and at the Dept. of Computer Science, Oxford University, Oxford.
-}}
+
 %\begin{acknowledgements}
 %This work began when the first author visited the Indraprastha Institute of Information
 %Technology, Delhi in Spring 2013. H.D. would like to thank Dr. Kathleen R. McKeown,Director
@@ -1449,8 +1544,9 @@ H.D. is also an adjunct assistant professor at the Department of Computer Scienc
 
 % BibTeX users please use one of
 %\bibliographystyle{spbasic}      % basic style, author-year citations
-\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spmpsci}      % mathematics and physical sciences
 %\bibliographystyle{spphys}       % APS-like style for physics
+\bibliographystyle{unsrt}
 \bibliography{fs}   % name your BibTeX data base
 
 \newpage
